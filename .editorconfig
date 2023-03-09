@@ -1,0 +1,16 @@
+# EditorConfig file (https://EditorConfig.org)
+
+# top-most EditorConfig file
+root = true
+
+# Apply to every file
+[*]
+trim_trailing_whitespace = true
+insert_final_newline = true
+max_line_length = 140
+
+# Java, Groovy, Kotlin and XML files
+[*.{groovy,java,kt,xml}]
+indent_style = space
+indent_size = 2
+charset = utf-8
