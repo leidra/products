@@ -1,7 +1,6 @@
-package net.leidra.atsistemas.prices.infrastructure.http.controllers;
+package net.leidra.atsistemas.prices;
 
 import io.cucumber.spring.CucumberContextConfiguration;
-import net.leidra.atsistemas.prices.PricesApplication;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.context.SpringBootTest.WebEnvironment;
 import org.springframework.boot.test.web.server.LocalServerPort;

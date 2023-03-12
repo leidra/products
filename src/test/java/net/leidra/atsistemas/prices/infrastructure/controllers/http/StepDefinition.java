@@ -1,6 +1,6 @@
-package net.leidra.atsistemas.prices.infrastructure.http.controllers;
+package net.leidra.atsistemas.prices.infrastructure.controllers.http;
 
-import java.time.ZonedDateTime;
+import java.time.Instant;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -9,6 +9,8 @@ import io.cucumber.java.Before;
 import io.cucumber.java.DataTableType;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
+import net.leidra.atsistemas.prices.SpringIntegrationTest;
+import net.leidra.atsistemas.prices.infrastructure.controllers.http.dto.GetPricesRequest;
 import org.springframework.web.reactive.function.client.WebClient.ResponseSpec;
 import reactor.core.publisher.Mono;
 
@@ -32,18 +34,20 @@ public class StepDefinition extends SpringIntegrationTest {
   public GetPricesRequest priceRequest(final Map<String, String> requests) {
     return new GetPricesRequest(Long.valueOf(requests.get("brand-id")),
         Long.valueOf(requests.get("product-id")),
-        ZonedDateTime.parse(requests.get("tariff-date")));
+        Instant.parse(requests.get("tariff-date")));
   }
 
   @DataTableType
   @SuppressWarnings("unused")
-  public GetPricesResponse priceResponse(final Map<String, String> response) {
-    return new GetPricesResponse(Long.valueOf(response.get("brand-id")),
-        Long.valueOf(response.get("product-id")),
-        Long.valueOf(response.get("tariff-id")),
-        ZonedDateTime.parse(response.get("tariff-date-from")),
-        ZonedDateTime.parse(response.get("tariff-date-to")),
-        Double.valueOf(response.get("price")));
+  public ProductPriceDetailResponse priceResponse(final Map<String, String> response) {
+    return new ProductPriceDetailResponse()
+      .id(Long.valueOf(response.get("product-id")))
+      .brandId(Long.valueOf(response.get("brand-id")))
+      .tariffId(Long.valueOf(response.get("tariff-id")))
+      .tariffDateFrom(Instant.parse(response.get("tariff-date-from")))
+      .tariffDateTo(Instant.parse(response.get("tariff-date-to")))
+      .priceValue(Double.valueOf(response.get("price-value")))
+      .price(response.get("price"));
   }
 
   @When("the client makes a GET request to \\/api\\/ecommerce\\/brands\\/<brand-id>\\/products\\/<product-id>\\/prices?date=<tariff-date> providing:")
@@ -61,7 +65,7 @@ public class StepDefinition extends SpringIntegrationTest {
 
   @SuppressWarnings("unused")
   @Then("the client receives status code of {int} and the response contains:")
-  public void the_client_receives_status_code(Integer statusCode, List<GetPricesResponse> expectedResponses) {
+  public void the_client_receives_status_code(Integer statusCode, List<ProductPriceDetailResponse> expectedResponses) {
     responses.forEach(response -> {
       final Mono<Object> responseObject = response
           .onStatus(status -> status.value() != statusCode,

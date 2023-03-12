@@ -1,4 +1,4 @@
-package net.leidra.atsistemas.prices.infrastructure.http.controllers;
+package net.leidra.atsistemas.prices;
 
 import org.junit.platform.suite.api.ConfigurationParameter;
 import org.junit.platform.suite.api.SelectClasspathResource;

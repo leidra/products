@@ -17,7 +17,10 @@
 	<properties>
 		<cucumber-bom.version>7.11.1</cucumber-bom.version>
 		<java.version>17</java.version>
-	</properties>
+    <springdoc-openapi-webflux-ui.version>1.6.15</springdoc-openapi-webflux-ui.version>
+    <swagger-annotations.version>1.6.9</swagger-annotations.version>
+    <jackson-databind-nullable.version>0.2.3</jackson-databind-nullable.version>
+  </properties>
 	<dependencies>
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
@@ -27,7 +30,11 @@
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-webflux</artifactId>
 		</dependency>
-
+    <dependency>
+      <groupId>org.springdoc</groupId>
+      <artifactId>springdoc-openapi-webflux-ui</artifactId>
+      <version>${springdoc-openapi-webflux-ui.version}</version>
+    </dependency>
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-devtools</artifactId>
@@ -69,6 +76,16 @@
 			<artifactId>junit-platform-suite</artifactId>
 			<scope>test</scope>
 		</dependency>
+    <dependency>
+      <groupId>io.swagger</groupId>
+      <artifactId>swagger-annotations</artifactId>
+      <version>${swagger-annotations.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>org.openapitools</groupId>
+      <artifactId>jackson-databind-nullable</artifactId>
+      <version>${jackson-databind-nullable.version}</version>
+    </dependency>
 	</dependencies>
 
 	<dependencyManagement>
@@ -85,17 +102,68 @@
 
 	<build>
 		<plugins>
-			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-compiler-plugin</artifactId>
-				<version>3.10.1</version>
-				<configuration>
-					<encoding>UTF-8</encoding>
-					<source>${java.version}</source>
-					<target>${java.version}</target>
-				</configuration>
-			</plugin>
-		</plugins>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-compiler-plugin</artifactId>
+        <version>3.10.1</version>
+        <configuration>
+          <encoding>UTF-8</encoding>
+          <source>${java.version}</source>
+          <target>${java.version}</target>
+        </configuration>
+      </plugin>
+      <plugin>
+        <groupId>org.openapitools</groupId>
+        <artifactId>openapi-generator-maven-plugin</artifactId>
+        <version>6.4.0</version>
+        <executions>
+          <execution>
+            <id>operator-service-api-codegen</id>
+            <goals>
+              <goal>generate</goal>
+            </goals>
+            <configuration>
+              <inputSpec>${project.basedir}/docs/specs/openapi/openapi.yml</inputSpec>
+              <templateDirectory>${project.basedir}/src/main/resources/response-wrapping-fix</templateDirectory>
+
+              <generatorName>spring</generatorName>
+
+              <apiPackage>net.leidra.atsistemas.prices.infrastructure.controllers.http</apiPackage>
+              <modelPackage>net.leidra.atsistemas.prices.infrastructure.controllers.http</modelPackage>
+              <modelNameSuffix>Response</modelNameSuffix>
+
+              <typeMappings>OffsetDateTime=java.time.Instant</typeMappings>
+              <importMappings>java.time.OffsetDateTime=java.time.Instant</importMappings>
+
+              <additionalProperties>useTags=true</additionalProperties>
+
+              <globalProperties>
+                <modelDocs>false</modelDocs>
+                <apiDocs>false</apiDocs>
+                <apiTests>false</apiTests>
+              </globalProperties>
+
+              <configOptions>
+                <apiFrist>true</apiFrist>
+                <library>spring-boot</library>
+                <dateLibrary>java8</dateLibrary>
+                <useSpringBoot3>true</useSpringBoot3>
+                <useSwaggerUI>true</useSwaggerUI>
+                <javaVersion>17</javaVersion>
+                <skipDefaultInterface>true</skipDefaultInterface>
+                <requestMappingMode>none</requestMappingMode>
+                <javaPostProcessors>true</javaPostProcessors>
+                <reactive>true</reactive>
+                <interfaceOnly>true</interfaceOnly>
+                <skipDefaultInterface>true</skipDefaultInterface>
+                <useBeanValidation>false</useBeanValidation>
+                <performBeanValidation>false</performBeanValidation>
+              </configOptions>
+            </configuration>
+          </execution>
+        </executions>
+      </plugin>
+    </plugins>
 	</build>
 
 </project>
