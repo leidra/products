@@ -1,0 +1,74 @@
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+   http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.4.xsd">
+
+  <!--
+  INFO: For documentation on available changeSet commands take a look at the following page:
+  https://docs.liquibase.com/change-types/home.html
+   -->
+
+  <changeSet author="Ardiel" id="0.1.0-prices-initial-table" context="schema">
+    <comment>Product prices database initialization</comment>
+    <createTable tableName="brands">
+      <column name="id" type="bigint">
+        <constraints primaryKey="true" primaryKeyName="brand_id" nullable="false"/>
+      </column>
+      <column name="name" type="varchar">
+        <constraints nullable="false"/>
+      </column>
+    </createTable>
+    <addUniqueConstraint
+      columnNames="name"
+      constraintName="brand_name_unique"
+      tableName="brands"/>
+    <createTable tableName="prices">
+      <column name="brand_id" type="bigint">
+        <constraints nullable="false" foreignKeyName="fk_brand_id"
+          references="brands(id)"/>
+      </column>
+      <column name="start_date" type="timestamp">
+        <constraints nullable="false"/>
+      </column>
+      <column name="end_date" type="timestamp">
+        <constraints nullable="false"/>
+      </column>
+      <column name="price_list" type="bigint">
+        <constraints primaryKey="true" primaryKeyName="price_list_id" nullable="false"/>
+      </column>
+      <column name="product_id" type="bigint">
+        <constraints nullable="false"/>
+      </column>
+      <column name="priority" type="tinyint" defaultValue="0">
+        <constraints nullable="false"/>
+      </column>
+      <column name="price" type="double">
+        <constraints nullable="false"/>
+      </column>
+      <column name="curr" type="varchar(3)" defaultValue="EUR">
+        <constraints nullable="false"/>
+      </column>
+    </createTable>
+    <addUniqueConstraint
+    columnNames="brand_id, product_id, start_date, end_date"
+    constraintName="brand_id_product_id_start_date_end_date_unique"
+    tableName="prices"/>
+  </changeSet>
+  <changeSet id="products-data" author="Ardiel" context="data">
+    <loadData tableName="brands" relativeToChangelogFile="true" file="liquibase/data/brands.csv">
+      <column header="id" name="id" type="LONG" />
+      <column header="name" name="name" type="STRING" />
+    </loadData>
+    <loadData tableName="prices" relativeToChangelogFile="true" file="liquibase/data/prices.csv">
+      <column header="brand_id" name="brand_id" type="LONG" />
+      <column header="start_date" name="start_date" type="TIMESTAMP" />
+      <column header="end_date" name="end_date" type="TIMESTAMP" />
+      <column header="price_list" name="price_list" type="LONG" />
+      <column header="product_id" name="product_id" type="LONG" />
+      <column header="priority" name="priority" type="INTEGER" />
+      <column header="price" name="price" type="BIGDECIMAL" />
+      <column header="currency" name="currency" type="STRING" />
+    </loadData>
+  </changeSet>
+
+</databaseChangeLog>

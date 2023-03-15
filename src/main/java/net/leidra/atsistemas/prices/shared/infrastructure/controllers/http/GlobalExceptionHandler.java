@@ -25,6 +25,7 @@ public final class GlobalExceptionHandler {
     return Mono.just(ResponseEntity
       .status(HttpStatus.INTERNAL_SERVER_ERROR)
       .body(new ErrorResponse()
-        .message(exception.getMessage())));
+        .message(exception.getMessage())))
+      .log();
   }
 }

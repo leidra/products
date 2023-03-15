@@ -62,7 +62,7 @@ paths:
               examples:
                 2020-06-14T10:00:00Z:
                   value:
-                    id: 35455
+                    productId: 35455
                     brandId: 1
                     tariffId: 1
                     tariffDateFrom: 2020-06-14T00:00:00Z
@@ -72,7 +72,7 @@ paths:
                     currency: EUR
                 2020-06-14T16:00:00Z:
                   value:
-                    id: 35455
+                    productId: 35455
                     brandId: 1
                     tariffId: 2
                     tariffDateFrom: 2020-06-14T15:00:00Z
@@ -82,7 +82,7 @@ paths:
                     currency: EUR
                 2020-06-14T21:00:00Z:
                   value:
-                    id: 35455
+                    productId: 35455
                     brandId: 1
                     tariffId: 1
                     tariffDateFrom: 2020-06-14T00:00:00Z
@@ -92,7 +92,7 @@ paths:
                     currency: EUR
                 2020-06-15T10:00:00Z:
                   value:
-                    id: 35455
+                    productId: 35455
                     brandId: 1
                     tariffId: 3
                     tariffDateFrom: 2020-06-15T00:00:00Z
@@ -102,7 +102,7 @@ paths:
                     currency: EUR
                 2020-06-16T21:00:00Z:
                   value:
-                    id: 35455
+                    productId: 35455
                     brandId: 1
                     tariffId: 4
                     tariffDateFrom: 2020-06-15T16:00:00
@@ -126,14 +126,14 @@ components:
     ProductPriceDetail:
       type: object
       required:
-        - id
+        - productId
         - brandId
         - tariffId
         - tariffDateFrom
         - tariffDateTo
         - price
       properties:
-        id:
+        productId:
           type: integer
           format: int64
           example: 35455
