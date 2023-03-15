@@ -11,9 +11,11 @@ import io.cucumber.java.DataTableType;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import net.leidra.atsistemas.products.SpringIntegrationTest;
-import net.leidra.atsistemas.products.prices.domain.Currency;
 import net.leidra.atsistemas.products.infrastructure.controllers.http.ProductPriceDetailResponse.CurrencyEnum;
 import net.leidra.atsistemas.products.infrastructure.controllers.http.dto.GetPricesRequest;
+import net.leidra.atsistemas.products.prices.domain.Currency;
+import net.leidra.atsistemas.products.prices.domain.exceptions.ProductPriceNotFound;
+import org.springframework.http.HttpStatusCode;
 import org.springframework.web.reactive.function.client.WebClient;
 import org.springframework.web.reactive.function.client.WebClient.ResponseSpec;
 import reactor.core.publisher.Mono;
@@ -53,6 +55,10 @@ public class StepDefinition extends SpringIntegrationTest {
       .currency(CurrencyEnum.fromValue(
         Currency.fromSymbol(response.get("price").substring(response.get("price").length() - 1)).map(Currency::code)
           .orElse(Currency.EUR.code())));
+  }
+
+  public String messages(final Map<String, String> messages) {
+    return messages.get("message");
   }
 
   @When("the client makes a GET request to \\/api\\/ecommerce\\/brands\\/<brand-id>\\/products\\/<product-id>\\/prices?date=<tariff-date> providing:")
@@ -96,5 +102,22 @@ public class StepDefinition extends SpringIntegrationTest {
     assertThat(productPriceDetailResponse.getTariffDateTo()).isEqualTo(expectedResponse.getTariffDateTo());
     assertThat(productPriceDetailResponse.getPrice()).isEqualTo(expectedResponse.getPrice());
     assertThat(productPriceDetailResponse.getPriceValue()).isEqualTo(expectedResponse.getPriceValue());
+  }
+
+  @Then("the price list is not found and the response contains:")
+  public void the_response_is_not_found(final List<String> messages) {
+    final AtomicReference<Integer> currentResponse = new AtomicReference<>(0);
+    responses.forEach(response -> {
+      try {
+        response
+          .onStatus(HttpStatusCode::isError, errorResponse ->
+            errorResponse.bodyToMono(ErrorResponse.class)
+              .map(error -> new ProductPriceNotFound(error.getMessage())))
+          .bodyToMono(ProductPriceDetailResponse.class)
+          .block();
+      } catch (final Exception e) {
+        assertThat(e.getCause().getMessage()).isEqualTo(messages.get(currentResponse.getAndSet(currentResponse.get() + 1)));
+      }
+    });
   }
 }

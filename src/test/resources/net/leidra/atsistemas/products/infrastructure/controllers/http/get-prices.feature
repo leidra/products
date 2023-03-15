@@ -15,3 +15,13 @@ Feature: Retrieving product price
       | 1         | 35455      | 1          | 2020-06-14T00:00:00Z    | 2020-12-31T23:59:59Z  | 35.50           | 35.50€ |
       | 1         | 35455      | 3          | 2020-06-15T00:00:00Z    | 2020-06-15T11:00:00Z  | 30.50           | 30.50€ |
       | 1         | 35455      | 4          | 2020-06-15T16:00:00Z    | 2020-12-31T23:59:59Z  | 38.95           | 38.95€ |
+  Scenario: price is not found
+    When the client makes a GET request to /api/ecommerce/brands/<brand-id>/products/<product-id>/prices?date=<tariff-date> providing:
+      | brand-id  | product-id  | tariff-date            |
+      | 0         | 35455       | 2020-06-14T10:00:00Z   |
+      | 1         | 00000       | 2020-06-14T16:00:00Z   |
+      | 1         | 35455       | 2019-06-14T21:00:00Z   |
+    Then the price list is not found and the response contains:
+      | Cannot find price list searching by: brandId => 0, productId => 35455, application date => 2020-06-14T10:00:00Z         |
+      | Cannot find price list searching by: brandId => 1, productId => 0, application date => 2020-06-14T16:00:00Z             |
+      | Cannot find price list searching by: brandId => 1, productId => 35455, application date => 2019-06-14T21:00:00Z         |
