@@ -20,6 +20,7 @@
     <springdoc-openapi-webflux-ui.version>1.6.15</springdoc-openapi-webflux-ui.version>
     <swagger-annotations.version>1.6.9</swagger-annotations.version>
     <jackson-databind-nullable.version>0.2.3</jackson-databind-nullable.version>
+    <archunit-junit5.version>1.0.1</archunit-junit5.version>
   </properties>
 	<dependencies>
 		<dependency>
@@ -92,7 +93,13 @@
       <groupId>org.liquibase</groupId>
       <artifactId>liquibase-core</artifactId>
     </dependency>
-	</dependencies>
+    <dependency>
+      <groupId>com.tngtech.archunit</groupId>
+      <artifactId>archunit-junit5</artifactId>
+      <scope>test</scope>
+      <version>${archunit-junit5.version}</version>
+    </dependency>
+  </dependencies>
 
 	<dependencyManagement>
 		<dependencies>
@@ -134,8 +141,8 @@
 
               <generatorName>spring</generatorName>
 
-              <apiPackage>net.leidra.atsistemas.prices.infrastructure.controllers.http</apiPackage>
-              <modelPackage>net.leidra.atsistemas.prices.infrastructure.controllers.http</modelPackage>
+              <apiPackage>net.leidra.atsistemas.products.infrastructure.controllers.http</apiPackage>
+              <modelPackage>net.leidra.atsistemas.products.infrastructure.controllers.http</modelPackage>
               <modelNameSuffix>Response</modelNameSuffix>
 
               <typeMappings>OffsetDateTime=java.time.Instant</typeMappings>
