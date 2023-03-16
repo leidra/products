@@ -1,4 +1,4 @@
-package net.leidra.atsistemas.products.infrastructure.controllers.http;
+package net.leidra.atsistemas.products.prices.infrastructure.controllers.http;
 
 import java.time.Instant;
 import java.util.ArrayList;
@@ -11,8 +11,10 @@ import io.cucumber.java.DataTableType;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import net.leidra.atsistemas.products.SpringIntegrationTest;
+import net.leidra.atsistemas.products.infrastructure.controllers.http.ErrorResponse;
+import net.leidra.atsistemas.products.infrastructure.controllers.http.ProductPriceDetailResponse;
 import net.leidra.atsistemas.products.infrastructure.controllers.http.ProductPriceDetailResponse.CurrencyEnum;
-import net.leidra.atsistemas.products.infrastructure.controllers.http.dto.GetPricesRequest;
+import net.leidra.atsistemas.products.prices.infrastructure.controllers.http.dto.GetPricesRequest;
 import net.leidra.atsistemas.products.prices.domain.Currency;
 import net.leidra.atsistemas.products.prices.domain.exceptions.ProductPriceNotFound;
 import org.springframework.http.HttpStatusCode;

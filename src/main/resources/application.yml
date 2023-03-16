@@ -22,3 +22,10 @@ spring:
 logging:
   level:
     root: INFO
+springdoc:
+  api-docs:
+    enabled: false
+    path: '/openapi.yml'
+    swagger-ui:
+      config-url: '/openapi.yml'
+      url: '/openapi.yml'

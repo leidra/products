@@ -1,4 +1,4 @@
-package net.leidra.atsistemas.products.shared.infrastructure.server.h2;
+package net.leidra.atsistemas.shared.infrastructure.server.h2;
 
 import org.h2.tools.Server;
 import org.springframework.context.annotation.Profile;

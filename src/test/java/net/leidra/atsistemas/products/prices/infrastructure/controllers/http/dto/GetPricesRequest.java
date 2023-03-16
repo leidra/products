@@ -1,4 +1,4 @@
-package net.leidra.atsistemas.products.infrastructure.controllers.http.dto;
+package net.leidra.atsistemas.products.prices.infrastructure.controllers.http.dto;
 
 import java.time.Instant;
 

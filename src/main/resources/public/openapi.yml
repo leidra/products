@@ -1,7 +1,7 @@
 openapi: 3.0.0
 servers:
   - description: Localhost
-    url: http://lolcahost:8080/api/products/1.0.0
+    url: http://localhost:8080/api/products/1.0.0
 info:
   description: AtSistemas Product prices challenge api
   version: "1.0.0"
