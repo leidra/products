@@ -1,0 +1,362 @@
+{
+	"info": {
+		"_postman_id": "c63c6d0f-ceba-4858-89de-cddaf203604a",
+		"name": "Products API",
+		"description": "AtSistemas Product prices challenge api\n\nContact Support:\n Email: ardielfs@gmail.com",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "2020-06-14T10:00:00Z",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});",
+							"",
+							"pm.test(\"Price is correct\", function () {",
+							"    let response = pm.response.json();",
+							"    pm.expect(response.price).eq(\"35.50€\");",
+							"});",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json"
+					}
+				],
+				"url": {
+					"raw": "http://localhost:8080/api/ecommerce/brands/:brand-id/products/:product-id/prices?date=2020-06-14T10:00:00Z",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"ecommerce",
+						"brands",
+						":brand-id",
+						"products",
+						":product-id",
+						"prices"
+					],
+					"query": [
+						{
+							"key": "date",
+							"value": "2020-06-14T10:00:00Z",
+							"description": "(Required) Product price application date"
+						}
+					],
+					"variable": [
+						{
+							"key": "brand-id",
+							"value": "1",
+							"description": "(Required) Brand identifier"
+						},
+						{
+							"key": "product-id",
+							"value": "35455",
+							"description": "(Required) Product identifier"
+						}
+					]
+				},
+				"description": "Return the corresponding product price for the given date\n"
+			},
+			"response": []
+		},
+		{
+			"name": "2020-06-14T16:00:00Z",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});",
+							"",
+							"pm.test(\"Price is correct\", function () {",
+							"    let response = pm.response.json();",
+							"    pm.expect(response.price).eq(\"25.45€\");",
+							"});",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json"
+					}
+				],
+				"url": {
+					"raw": "http://localhost:8080/api/ecommerce/brands/:brand-id/products/:product-id/prices?date=2020-06-14T16:00:00Z",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"ecommerce",
+						"brands",
+						":brand-id",
+						"products",
+						":product-id",
+						"prices"
+					],
+					"query": [
+						{
+							"key": "date",
+							"value": "2020-06-14T16:00:00Z",
+							"description": "(Required) Product price application date"
+						}
+					],
+					"variable": [
+						{
+							"key": "brand-id",
+							"value": "1",
+							"description": "(Required) Brand identifier"
+						},
+						{
+							"key": "product-id",
+							"value": "35455",
+							"description": "(Required) Product identifier"
+						}
+					]
+				},
+				"description": "Return the corresponding product price for the given date\n"
+			},
+			"response": []
+		},
+		{
+			"name": "2020-06-14T21:00:00Z",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});",
+							"",
+							"pm.test(\"Price is correct\", function () {",
+							"    let response = pm.response.json();",
+							"    pm.expect(response.price).eq(\"35.50€\");",
+							"});",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json"
+					}
+				],
+				"url": {
+					"raw": "http://localhost:8080/api/ecommerce/brands/:brand-id/products/:product-id/prices?date=2020-06-14T21:00:00Z",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"ecommerce",
+						"brands",
+						":brand-id",
+						"products",
+						":product-id",
+						"prices"
+					],
+					"query": [
+						{
+							"key": "date",
+							"value": "2020-06-14T21:00:00Z",
+							"description": "(Required) Product price application date"
+						}
+					],
+					"variable": [
+						{
+							"key": "brand-id",
+							"value": "1",
+							"description": "(Required) Brand identifier"
+						},
+						{
+							"key": "product-id",
+							"value": "35455",
+							"description": "(Required) Product identifier"
+						}
+					]
+				},
+				"description": "Return the corresponding product price for the given date\n"
+			},
+			"response": []
+		},
+		{
+			"name": "2020-06-15T10:00:00Z",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});",
+							"",
+							"pm.test(\"Price is correct\", function () {",
+							"    let response = pm.response.json();",
+							"    pm.expect(response.price).eq(\"30.50€\");",
+							"});",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json"
+					}
+				],
+				"url": {
+					"raw": "http://localhost:8080/api/ecommerce/brands/:brand-id/products/:product-id/prices?date=2020-06-15T10:00:00Z",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"ecommerce",
+						"brands",
+						":brand-id",
+						"products",
+						":product-id",
+						"prices"
+					],
+					"query": [
+						{
+							"key": "date",
+							"value": "2020-06-15T10:00:00Z",
+							"description": "(Required) Product price application date"
+						}
+					],
+					"variable": [
+						{
+							"key": "brand-id",
+							"value": "1",
+							"description": "(Required) Brand identifier"
+						},
+						{
+							"key": "product-id",
+							"value": "35455",
+							"description": "(Required) Product identifier"
+						}
+					]
+				},
+				"description": "Return the corresponding product price for the given date\n"
+			},
+			"response": []
+		},
+		{
+			"name": "2020-06-16T21:00:00Z",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});",
+							"",
+							"pm.test(\"Price is correct\", function () {",
+							"    let response = pm.response.json();",
+							"    pm.expect(response.price).eq(\"38.95€\");",
+							"});",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json"
+					}
+				],
+				"url": {
+					"raw": "http://localhost:8080/api/ecommerce/brands/:brand-id/products/:product-id/prices?date=2020-06-16T21:00:00Z",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"ecommerce",
+						"brands",
+						":brand-id",
+						"products",
+						":product-id",
+						"prices"
+					],
+					"query": [
+						{
+							"key": "date",
+							"value": "2020-06-16T21:00:00Z",
+							"description": "(Required) Product price application date"
+						}
+					],
+					"variable": [
+						{
+							"key": "brand-id",
+							"value": "1",
+							"description": "(Required) Brand identifier"
+						},
+						{
+							"key": "product-id",
+							"value": "35455",
+							"description": "(Required) Product identifier"
+						}
+					]
+				},
+				"description": "Return the corresponding product price for the given date\n"
+			},
+			"response": []
+		}
+	],
+	"variable": [
+		{
+			"key": "baseUrl",
+			"value": "http://lolcahost:8080/api/products/1.0.0",
+			"type": "string"
+		}
+	]
+}

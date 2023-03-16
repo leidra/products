@@ -1,6 +1,7 @@
 package net.leidra.atsistemas.products;
 
 import io.cucumber.spring.CucumberContextConfiguration;
+import net.leidra.atsistemas.PricesApplication;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.context.SpringBootTest.WebEnvironment;
 import org.springframework.boot.test.web.server.LocalServerPort;
